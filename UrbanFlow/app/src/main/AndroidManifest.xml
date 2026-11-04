@@ -14,6 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UrbanFlow">
+
+        <activity
+            android:name=".PerfilActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AcessibilidadeActivity"
+            android:exported="false" />
         <activity
             android:name=".MapComposeActivity"
             android:exported="false" />

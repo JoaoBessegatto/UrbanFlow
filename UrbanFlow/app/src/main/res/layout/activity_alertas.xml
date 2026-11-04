@@ -14,34 +14,47 @@
         <!-- CABEÇALHO -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="190dp"
+            android:layout_height="wrap_content"
+            android:minHeight="210dp"
             android:background="#102B46"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:orientation="vertical"
             android:padding="24dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="URBANFLOW"
-                android:textColor="#45D6B0"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.08" />
+            <ImageButton
+                android:id="@+id/btnVoltar"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="start"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_arrow_back"
+                android:tint="#FFFFFF"
+                android:padding="14dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="Voltar" />
+
+            <ImageView
+                android:layout_width="170dp"
+                android:layout_height="95dp"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="Logo UrbanFlow"
+                android:src="@drawable/logo_urbanflow_mobilidade_inteligente"
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 android:text="Central de alertas"
                 android:textColor="#FFFFFF"
-                android:textSize="28sp"
+                android:textSize="27sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
+                android:gravity="center"
                 android:text="Fique informado sobre o trânsito da cidade."
                 android:textColor="#D5E2ED"
                 android:textSize="14sp" />

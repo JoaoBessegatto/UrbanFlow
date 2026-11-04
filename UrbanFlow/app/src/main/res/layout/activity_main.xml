@@ -13,31 +13,45 @@
         android:orientation="vertical"
         android:paddingBottom="28dp">
 
+
         <!-- CABEÇALHO -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#102B46"
+            android:gravity="center"
             android:orientation="vertical"
             android:paddingStart="24dp"
-            android:paddingTop="32dp"
+            android:paddingTop="24dp"
             android:paddingEnd="24dp"
             android:paddingBottom="30dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="URBANFLOW"
-                android:textColor="#45D6B0"
-                android:textSize="27sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.08" />
+            <ImageButton
+                android:id="@+id/btnPerfil"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_gravity="end"
+                android:background="@android:color/transparent"
+                android:contentDescription="Abrir meu perfil"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                android:src="@android:drawable/ic_menu_myplaces"
+                android:tint="#FFFFFF" />
+
+            <ImageView
+                android:layout_width="190dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="Logo UrbanFlow"
+                android:src="@drawable/logo_urbanflow_mobilidade_inteligente"
+                android:scaleType="fitCenter" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:text="Olá! Seja bem-vindo."
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="Olá, Seja bem-vindo!"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -46,6 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:gravity="center"
                 android:text="Sua mobilidade começa aqui."
                 android:textColor="#C5D7E5"
                 android:textSize="14sp" />
@@ -53,8 +68,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
+                android:layout_marginTop="18dp"
                 android:background="#1D4564"
+                android:gravity="center"
                 android:paddingHorizontal="14dp"
                 android:paddingVertical="9dp"
                 android:text="⌖  ARAÇATUBA • SP"
@@ -71,6 +87,19 @@
             android:orientation="vertical"
             android:paddingStart="20dp"
             android:paddingEnd="20dp">
+
+            <!-- BOTÃO DE LEITURA POR VOZ -->
+            <Button
+                android:id="@+id/btnOuvirPagina"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="18dp"
+                android:backgroundTint="#167D72"
+                android:text="🔊 Ouvir leitura da página"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <!-- STATUS DO TRÂNSITO -->
             <LinearLayout
@@ -356,6 +385,64 @@
                     android:layout_width="wrap_content"
                     android:layout_height="44dp"
                     android:backgroundTint="#7954B5"
+                    android:minWidth="0dp"
+                    android:text="Abrir"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <!-- ACESSIBILIDADE -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_dashboard_card"
+                android:elevation="2dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="18dp">
+
+                <TextView
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="#E2F7F1"
+                    android:gravity="center"
+                    android:text="♿"
+                    android:textColor="#167D72"
+                    android:textSize="27sp"
+                    android:contentDescription="Acessibilidade" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Acessibilidade"
+                        android:textColor="#102B46"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Personalize sua experiência"
+                        android:textColor="#829AB1"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnAcessibilidade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:backgroundTint="#167D72"
                     android:minWidth="0dp"
                     android:text="Abrir"
                     android:textAllCaps="false"

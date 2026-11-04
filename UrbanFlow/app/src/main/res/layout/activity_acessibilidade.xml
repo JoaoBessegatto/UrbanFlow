@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F3F6F8"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="28dp">
+
+        <!-- CABEÇALHO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#102B46"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <ImageButton
+                android:id="@+id/btnVoltar"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="start"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_arrow_back"
+                android:tint="#FFFFFF"
+                android:padding="14dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="Voltar" />
+
+            <ImageView
+                android:layout_width="170dp"
+                android:layout_height="95dp"
+                android:contentDescription="Logo UrbanFlow"
+                android:src="@drawable/logo_urbanflow_mobilidade_inteligente"
+                android:scaleType="fitCenter" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Acessibilidade"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="center"
+                android:text="Mobilidade para todos."
+                android:textColor="#C5D7E5"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <!-- INTRODUÇÃO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@drawable/bg_dashboard_card"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sua experiência, do seu jeito!"
+                android:textColor="#102B46"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Personalize a visualização e a forma de receber informações no UrbanFlow."
+                android:textColor="#627D98"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <!-- ALTO CONTRASTE -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_dashboard_card"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="20dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alto contraste"
+                    android:textColor="#102B46"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Facilita a visualização dos elementos."
+                    android:textColor="#627D98"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <Switch
+                android:id="@+id/switchAltoContraste"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="Ativar alto contraste" />
+
+        </LinearLayout>
+
+        <!-- TAMANHO DA FONTE -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_dashboard_card"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tamanho da fonte"
+                android:textColor="#102B46"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Escolha o tamanho mais confortável para leitura."
+                android:textColor="#627D98"
+                android:textSize="13sp" />
+
+            <RadioGroup
+                android:id="@+id/grupoFonte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/fonteNormal"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Normal"
+                    android:textColor="#102B46"
+                    android:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/fonteGrande"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Grande"
+                    android:textColor="#102B46" />
+
+                <RadioButton
+                    android:id="@+id/fonteMuitoGrande"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Muito grande"
+                    android:textColor="#102B46" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <!-- LEITURA POR VOZ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_dashboard_card"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leitura por voz"
+                android:textColor="#102B46"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Ouça uma mensagem de demonstração do UrbanFlow."
+                android:textColor="#627D98"
+                android:textSize="13sp" />
+
+            <Button
+                android:id="@+id/btnOuvir"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="14dp"
+                android:backgroundTint="#167D72"
+                android:text="Ouvir informações"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <!-- RODAPÉ -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="URBANFLOW • ARAÇATUBA - SP"
+            android:textColor="#829AB1"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -3,6 +3,7 @@ package com.urbanflow.app;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +15,12 @@ public class AlertasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alertas);
+
+        ImageButton btnVoltar = findViewById(R.id.btnVoltar);
+
+        btnVoltar.setOnClickListener(v -> {
+            finish();
+        });
 
         listaAlertas = findViewById(R.id.listaAlertas);
 

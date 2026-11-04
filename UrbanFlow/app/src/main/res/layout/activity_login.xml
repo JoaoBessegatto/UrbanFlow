@@ -13,27 +13,17 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="URBANFLOW"
-            android:textColor="#45D6B0"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            android:letterSpacing="0.08" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Mobilidade inteligente, cidade conectada."
-            android:textColor="#D5E4EF"
-            android:textSize="14sp" />
+        <ImageView
+            android:layout_width="280dp"
+            android:layout_height="187dp"
+            android:contentDescription="Logo UrbanFlow"
+            android:src="@drawable/logo_urbanflow_mobilidade_inteligente"
+            android:scaleType="fitCenter" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="42dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/bg_login_card"
             android:elevation="8dp"
             android:orientation="vertical"

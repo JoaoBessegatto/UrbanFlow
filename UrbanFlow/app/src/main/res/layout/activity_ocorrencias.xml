@@ -9,203 +9,328 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="24dp">
 
         <!-- CABEÇALHO -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="190dp"
+            android:layout_height="wrap_content"
             android:background="#102B46"
             android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:orientation="horizontal"
+            android:padding="16dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="URBANFLOW"
-                android:textColor="#45D6B0"
-                android:textSize="11sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.08" />
+            <ImageButton
+                android:id="@+id/btnVoltar"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="Voltar"
+                android:src="@drawable/ic_arrow_back"
+                android:tint="#FFFFFF" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Ocorrências"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="8dp"
+                android:contentDescription="Logo UrbanFlow"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo_urbanflow_mobilidade_inteligente" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
-                android:text="Sua informação ajuda a transformar a cidade."
-                android:textColor="#D5E2ED"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <!-- CONTEÚDO -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <!-- CARTÃO DE REGISTRO -->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_dashboard_card"
-                android:elevation="3dp"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="COLABORE COM A CIDADE"
-                    android:textColor="#167D72"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:letterSpacing="0.08" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:text="O que está acontecendo?"
-                    android:textColor="#102B46"
-                    android:textSize="21sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="22dp"
-                    android:text="TIPO DE OCORRÊNCIA"
-                    android:textColor="#627D98"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
-
-                <Spinner
-                    android:id="@+id/spTipoOcorrencia"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_login_input"
-                    android:padding="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="LOCAL DA OCORRÊNCIA"
-                    android:textColor="#627D98"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/edtLocalOcorrencia"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_login_input"
-                    android:drawableStart="@android:drawable/ic_menu_mylocation"
-                    android:drawablePadding="12dp"
-                    android:hint="Ex.: Avenida Brasília"
-                    android:inputType="textCapSentences"
-                    android:padding="14dp"
-                    android:singleLine="true"
-                    android:textColor="#102B46"
-                    android:textColorHint="#8A9BAA" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="DESCRIÇÃO"
-                    android:textColor="#627D98"
-                    android:textSize="11sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/edtDescricaoOcorrencia"
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_login_input"
-                    android:gravity="top"
-                    android:hint="Conte o que aconteceu e, se possível, informe detalhes importantes..."
-                    android:inputType="textCapSentences|textMultiLine"
-                    android:padding="14dp"
-                    android:textColor="#102B46"
-                    android:textColorHint="#8A9BAA" />
-
-                <!-- BOTÃO -->
-                <Button
-                    android:id="@+id/btnSalvarOcorrencia"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="26dp"
-                    android:backgroundTint="#167D72"
-                    android:elevation="2dp"
-                    android:text="＋  Registrar ocorrência"
-                    android:textAllCaps="false"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <!-- LISTA DE OCORRÊNCIAS -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ocorrências registradas"
-                    android:textColor="#102B46"
-                    android:textSize="21sp"
+                    android:text="UrbanFlow Comunidade"
+                    android:textColor="#FFFFFF"
+                    android:textSize="19sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="Acompanhe os registros da comunidade."
-                    android:textColor="#627D98"
-                    android:textSize="13sp" />
-
-                <LinearLayout
-                    android:id="@+id/listaOcorrencias"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:orientation="vertical" />
+                    android:text="A cidade melhora quando todos participam."
+                    android:textColor="#D8E5EF"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
-            <!-- RODAPÉ -->
+        </LinearLayout>
+
+        <!-- PAINEL DE ESTATÍSTICAS -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_dashboard_card"
+            android:elevation="3dp"
+            android:orientation="vertical"
+            android:padding="20dp">
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PARTICIPAÇÃO DA COMUNIDADE"
+                android:textColor="#102B46"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:padding="12dp"
-                android:text="URBANFLOW • ARAÇATUBA - SP"
-                android:textColor="#8A9BAA"
-                android:textSize="11sp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtTotalRegistros"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#167D72"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Registros"
+                        android:textColor="#526575"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="50dp"
+                    android:background="#DCE4EA" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtTotalConfirmacoes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="#102B46"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Confirmações"
+                        android:textColor="#526575"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- MINHAS CONQUISTAS -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_dashboard_card"
+            android:elevation="3dp"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MINHAS CONQUISTAS"
+                android:textColor="#102B46"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtPontos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="0 pontos"
+                android:textColor="#167D72"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtConquistas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:lineSpacingExtra="8dp"
+                android:text="🥉 Cidadão Participativo&#10;🔒 Olho Vivo&#10;🔒 Agente da Mudança&#10;🔒 Guardião da Cidade"
+                android:textColor="#526575"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <!-- FORMULÁRIO DE REGISTRO -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_dashboard_card"
+            android:elevation="3dp"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="REGISTRAR OCORRÊNCIA"
+                android:textColor="#102B46"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Tipo de ocorrência"
+                android:textColor="#102B46"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spTipoOcorrencia"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_login_input"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Local da ocorrência"
+                android:textColor="#102B46"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edtLocalOcorrencia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_login_input"
+                android:hint="Ex.: Avenida Brasília, Centro"
+                android:inputType="textCapSentences"
+                android:padding="14dp"
+                android:textColor="#102B46"
+                android:textColorHint="#82909B"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Descrição"
+                android:textColor="#102B46"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edtDescricaoOcorrencia"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_login_input"
+                android:gravity="top|start"
+                android:hint="Descreva o problema encontrado..."
+                android:inputType="textCapSentences|textMultiLine"
+                android:padding="14dp"
+                android:textColor="#102B46"
+                android:textColorHint="#82909B"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btnSalvarOcorrencia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#167D72"
+                android:text="Enviar ocorrência"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
+        <!-- LISTA DE OCORRÊNCIAS -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_dashboard_card"
+            android:elevation="3dp"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OCORRÊNCIAS DA COMUNIDADE"
+                android:textColor="#102B46"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Veja os problemas registrados e ajude a confirmar aqueles que também identificou."
+                android:textColor="#526575"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:id="@+id/listaOcorrencias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical" />
+
+        </LinearLayout>
+
+        <!-- RODAPÉ -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="URBANFLOW • ARAÇATUBA - SP"
+            android:textColor="#82909B"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
     </LinearLayout>
+
 </ScrollView>
