@@ -2,6 +2,7 @@ package com.urbanflow.app.data;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.net.Uri;
 
 import com.urbanflow.app.BuildConfig;
 
@@ -13,7 +14,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -434,6 +434,6 @@ public class TomTomTrafficService {
     }
 
     private static String encode(String value) {
-        return URLEncoder.encode(value, StandardCharsets.UTF_8);
+        return Uri.encode(value);
     }
 }
