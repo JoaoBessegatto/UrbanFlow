@@ -7,9 +7,14 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.urbanflow.app.data.TomTomTrafficService;
+
+import java.util.List;
+
 public class AlertasActivity extends AppCompatActivity {
 
     private LinearLayout listaAlertas;
+    private TomTomTrafficService trafficService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +28,7 @@ public class AlertasActivity extends AppCompatActivity {
         });
 
         listaAlertas = findViewById(R.id.listaAlertas);
+        trafficService = new TomTomTrafficService();
 
         carregarAlertas();
     }
@@ -32,25 +38,113 @@ public class AlertasActivity extends AppCompatActivity {
         listaAlertas.removeAllViews();
 
         adicionarAlerta(
-                "Atenção no trânsito",
-                "Aqui aparecerão avisos de congestionamentos e lentidão.",
+                "Atualizando informações",
+                "Consultando fluxo e incidentes da TomTom para Araçatuba...",
                 "Trânsito",
                 "●"
         );
 
-        adicionarAlerta(
-                "Ocorrências na cidade",
-                "Avisos sobre acidentes, buracos e alagamentos.",
-                "Ocorrências",
-                "!"
-        );
+        trafficService.fetchTrafficStatus(
+                new TomTomTrafficService.Callback<TomTomTrafficService.TrafficStatus>() {
+                    @Override
+                    public void onSuccess(TomTomTrafficService.TrafficStatus status) {
+                        carregarIncidentes(status);
+                    }
 
-        adicionarAlerta(
-                "Seus trajetos",
-                "Aqui aparecerão alertas relacionados aos caminhos que você salvou.",
-                "Meus trajetos",
-                "⌖"
+                    @Override
+                    public void onError(Exception error) {
+                        carregarIncidentes(null);
+                    }
+                }
         );
+    }
+
+    private void carregarIncidentes(TomTomTrafficService.TrafficStatus status) {
+        trafficService.fetchIncidents(
+                new TomTomTrafficService.Callback<List<TomTomTrafficService.TrafficIncident>>() {
+                    @Override
+                    public void onSuccess(List<TomTomTrafficService.TrafficIncident> incidents) {
+                        renderizarAlertas(status, incidents);
+                    }
+
+                    @Override
+                    public void onError(Exception error) {
+                        renderizarAlertas(status, null);
+                    }
+                }
+        );
+    }
+
+    private void renderizarAlertas(
+            TomTomTrafficService.TrafficStatus status,
+            List<TomTomTrafficService.TrafficIncident> incidents
+    ) {
+        listaAlertas.removeAllViews();
+
+        if (status != null) {
+            adicionarAlerta(
+                    status.levelLabel(),
+                    status.summary(),
+                    "Fluxo em tempo real",
+                    "●"
+            );
+        }
+
+        if (incidents != null && !incidents.isEmpty()) {
+            int limite = Math.min(incidents.size(), 8);
+
+            for (int i = 0; i < limite; i++) {
+                TomTomTrafficService.TrafficIncident incident = incidents.get(i);
+
+                adicionarAlerta(
+                        incident.title,
+                        incident.detailsText(),
+                        incident.category,
+                        simboloParaCategoria(incident.category)
+                );
+            }
+        }
+
+        if (status == null && (incidents == null || incidents.isEmpty())) {
+            adicionarAlerta(
+                    "Não foi possível atualizar agora",
+                    "Verifique sua conexão e a configuração da chave TomTom. "
+                            + "Os dados locais do UrbanFlow continuam disponíveis.",
+                    "Trânsito",
+                    "!"
+            );
+            return;
+        }
+
+        if (incidents != null && incidents.isEmpty()) {
+            adicionarAlerta(
+                    "Nenhum incidente ativo encontrado",
+                    "A TomTom não retornou acidentes, bloqueios ou congestionamentos "
+                            + "ativos na área monitorada de Araçatuba.",
+                    "Incidentes",
+                    "✓"
+            );
+        }
+    }
+
+    private String simboloParaCategoria(String categoria) {
+        String valor = categoria.toLowerCase();
+
+        if (valor.contains("acidente")
+                || valor.contains("interdit")
+                || valor.contains("perig")) {
+            return "!";
+        }
+
+        if (valor.contains("congestion")) {
+            return "●";
+        }
+
+        if (valor.contains("obra")) {
+            return "◆";
+        }
+
+        return "⌖";
     }
 
     private void adicionarAlerta(
@@ -96,5 +190,12 @@ public class AlertasActivity extends AppCompatActivity {
         card.addView(texto);
 
         listaAlertas.addView(card);
+    }
+    @Override
+    protected void onDestroy() {
+        if (trafficService != null) {
+            trafficService.shutdown();
+        }
+        super.onDestroy();
     }
 }
