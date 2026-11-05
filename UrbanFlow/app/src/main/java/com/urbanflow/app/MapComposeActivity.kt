@@ -15,11 +15,12 @@ import kotlinx.coroutines.withContext
 import com.tomtom.sdk.init.TomTomSdk
 import com.tomtom.sdk.common.configuration.buildSdkConfiguration
 import com.tomtom.sdk.telemetry.UserConsent
-
 import com.tomtom.sdk.location.GeoPoint
 import com.tomtom.sdk.map.display.compose.TomTomMap
 import com.tomtom.sdk.map.display.compose.model.MapDisplayInfrastructure
+import com.tomtom.sdk.map.display.compose.nodes.Traffic
 import com.tomtom.sdk.map.display.compose.state.rememberMapViewState
+import com.tomtom.sdk.map.display.compose.state.rememberTrafficState
 import com.tomtom.sdk.map.display.camera.InitialCameraOptions
 
 class MapComposeActivity : ComponentActivity() {
@@ -40,6 +41,12 @@ class MapComposeActivity : ComponentActivity() {
 
             LaunchedEffect(Unit) {
                 try {
+                    if (chave.isBlank()) {
+                        throw IllegalStateException(
+                            "TomTom API Key não configurada. Defina tomtomApiKey em local.properties."
+                        )
+                    }
+
                     withContext(Dispatchers.IO) {
                         if (!TomTomSdk.isInitialized) {
                             val configuracao = buildSdkConfiguration(
@@ -106,6 +113,11 @@ fun MapaAracatuba() {
         initialCameraOptions = camera
     )
 
+    val trafego = rememberTrafficState(
+        showTrafficFlow = true,
+        showTrafficIncidents = true
+    )
+
     val infraestrutura = remember {
         MapDisplayInfrastructure(
             sdkContext = TomTomSdk.sdkContext
@@ -116,5 +128,7 @@ fun MapaAracatuba() {
         state = estado,
         infrastructure = infraestrutura,
         modifier = Modifier.fillMaxSize()
-    )
+    ) {
+        Traffic(state = trafego)
+    }
 }
