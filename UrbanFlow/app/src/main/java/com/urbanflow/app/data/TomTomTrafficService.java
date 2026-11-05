@@ -227,7 +227,7 @@ public class TomTomTrafficService {
                 String url = INCIDENTS_URL
                         + "?bbox=" + encode(bbox)
                         + "&fields=" + encode(fields)
-                        + "&language=pt-BR"
+                        + "&language=pt-PT"
                         + "&timeValidityFilter=present"
                         + "&key=" + encode(BuildConfig.TOMTOM_API_KEY);
 
