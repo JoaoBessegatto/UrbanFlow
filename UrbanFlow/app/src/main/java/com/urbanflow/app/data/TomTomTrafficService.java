@@ -2,9 +2,10 @@ package com.urbanflow.app.data;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.content.Context;
 import android.net.Uri;
 
-import com.urbanflow.app.BuildConfig;
+import com.urbanflow.app.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,7 +26,7 @@ import java.util.concurrent.Executors;
 /**
  * Cliente leve para os endpoints REST da TomTom Traffic API usados pelo UrbanFlow.
  *
- * A chave é injetada via BuildConfig a partir de local.properties ou da variável
+ * A chave é injetada via recurso R.string a partir de local.properties ou da variável
  * de ambiente TOMTOM_API_KEY. Ela não deve ser versionada no repositório.
  */
 public class TomTomTrafficService {
@@ -47,6 +48,11 @@ public class TomTomTrafficService {
 
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
+    private final String apiKey;
+
+    public TomTomTrafficService(Context context) {
+        apiKey = context.getString(R.string.tomtom_api_key).trim();
+    }
 
     public interface Callback<T> {
         void onSuccess(T result);
@@ -190,7 +196,7 @@ public class TomTomTrafficService {
                 String url = FLOW_URL
                         + "?point=" + encode(point)
                         + "&unit=KMPH"
-                        + "&key=" + encode(BuildConfig.TOMTOM_API_KEY);
+                        + "&key=" + encode(apiKey);
 
                 JSONObject root = requestJson(url);
                 JSONObject data = root.getJSONObject("flowSegmentData");
@@ -229,7 +235,7 @@ public class TomTomTrafficService {
                         + "&fields=" + encode(fields)
                         + "&language=pt-PT"
                         + "&timeValidityFilter=present"
-                        + "&key=" + encode(BuildConfig.TOMTOM_API_KEY);
+                        + "&key=" + encode(apiKey);
 
                 JSONObject root = requestJson(url);
                 JSONArray incidentsJson = root.optJSONArray("incidents");
@@ -287,9 +293,8 @@ public class TomTomTrafficService {
         executor.shutdownNow();
     }
 
-    private static void ensureApiKey() {
-        if (BuildConfig.TOMTOM_API_KEY == null
-                || BuildConfig.TOMTOM_API_KEY.trim().isEmpty()) {
+    private void ensureApiKey() {
+        if (apiKey.isEmpty()) {
             throw new IllegalStateException(
                     "TomTom API Key não configurada. Defina tomtomApiKey em local.properties "
                             + "ou TOMTOM_API_KEY no ambiente."
