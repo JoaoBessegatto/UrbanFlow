@@ -28,7 +28,7 @@ public class AlertasActivity extends AppCompatActivity {
         });
 
         listaAlertas = findViewById(R.id.listaAlertas);
-        trafficService = new TomTomTrafficService();
+        trafficService = new TomTomTrafficService(this);
 
         carregarAlertas();
     }
