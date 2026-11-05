@@ -22,6 +22,7 @@ import java.util.Locale;
 import android.net.Uri;
 import android.widget.ImageButton;
 import android.graphics.drawable.GradientDrawable;
+import com.urbanflow.app.data.TomTomTrafficService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
     private boolean vozDisponivel = false;
     private boolean lendo = false;
     private Button btnOuvirPagina;
+
+    // DADOS DE TRÂNSITO TOMTOM
+    private TextView txtStatusTransito;
+    private TomTomTrafficService trafficService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,8 +130,49 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // DADOS DE TRÂNSITO EM TEMPO REAL
+        txtStatusTransito = findViewById(R.id.txtStatusTransito);
+        trafficService = new TomTomTrafficService();
+        carregarStatusTransito();
+
         // INICIALIZA A VOZ
         inicializarLeitorVoz();
+    }
+
+    private void carregarStatusTransito() {
+        if (txtStatusTransito == null || trafficService == null) {
+            return;
+        }
+
+        txtStatusTransito.setText("Atualizando trânsito...");
+
+        trafficService.fetchTrafficStatus(
+                new TomTomTrafficService.Callback<TomTomTrafficService.TrafficStatus>() {
+                    @Override
+                    public void onSuccess(TomTomTrafficService.TrafficStatus status) {
+                        txtStatusTransito.setText(status.summary());
+
+                        int cor;
+                        if (status.roadClosure || status.speedRatio() < 0.50) {
+                            cor = 0xFFEB5757;
+                        } else if (status.speedRatio() < 0.80) {
+                            cor = 0xFFF2C94C;
+                        } else {
+                            cor = 0xFF167D72;
+                        }
+
+                        txtStatusTransito.setTextColor(cor);
+                    }
+
+                    @Override
+                    public void onError(Exception error) {
+                        txtStatusTransito.setText(
+                                "Dados de trânsito indisponíveis no momento"
+                        );
+                        txtStatusTransito.setTextColor(0xFF627D98);
+                    }
+                }
+        );
     }
 
     // INICIALIZA O TEXT TO SPEECH
@@ -300,6 +346,9 @@ public class MainActivity extends AppCompatActivity {
         aplicarAcessibilidade(altoContraste, tamanhoFonte);
 
         atualizarFotoPerfil();
+
+        // Atualiza o trânsito sempre que o usuário volta à tela inicial.
+        carregarStatusTransito();
     }
 
     private void atualizarFotoPerfil() {
@@ -439,6 +488,10 @@ public class MainActivity extends AppCompatActivity {
         if (leitorVoz != null) {
             leitorVoz.stop();
             leitorVoz.shutdown();
+        }
+
+        if (trafficService != null) {
+            trafficService.shutdown();
         }
 
         super.onDestroy();
