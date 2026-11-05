@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
         // DADOS DE TRÂNSITO EM TEMPO REAL
         txtStatusTransito = findViewById(R.id.txtStatusTransito);
-        trafficService = new TomTomTrafficService();
+        trafficService = new TomTomTrafficService(this);
         carregarStatusTransito();
 
         // INICIALIZA A VOZ
