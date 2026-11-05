@@ -3,7 +3,19 @@ plugins {
     alias(libs.plugins.compose.compiler)
 }
 
-def tomtomApiKey = project.findProperty("tomtomApiKey") ?: ""
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withInputStream { stream ->
+        localProperties.load(stream)
+    }
+}
+
+def tomtomApiKey =
+        localProperties.getProperty("tomtomApiKey")
+                ?: System.getenv("TOMTOM_API_KEY")
+                ?: project.findProperty("tomtomApiKey")
+                ?: ""
 
 android {
     namespace 'com.urbanflow.app'
