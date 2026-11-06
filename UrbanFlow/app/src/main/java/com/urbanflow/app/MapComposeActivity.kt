@@ -2,9 +2,11 @@ package com.urbanflow.app
 
 import android.app.ActivityManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -58,6 +60,18 @@ private val CENTRO_ARACATUBA = GeoPoint(latitude = -21.2089, longitude = -50.432
 
 class MapComposeActivity : ComponentActivity() {
 
+    /**
+     * Abre a tela inicial explicitamente. Caso ela ja exista na pilha,
+     * reutiliza a Activity em vez de criar uma segunda tela inicial.
+     */
+    private fun voltarParaInicio() {
+        val intent = Intent(this, MainActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        }
+        startActivity(intent)
+        finish()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -107,9 +121,12 @@ class MapComposeActivity : ComponentActivity() {
                 }
             }
 
+            // Mantem o mesmo comportamento no gesto/botao Voltar do Android.
+            BackHandler(onBack = { voltarParaInicio() })
+
             when {
                 erro != null -> MensagemMapa(erro ?: "Erro desconhecido")
-                pronto -> MapaAracatuba(onVoltar = { finish() })
+                pronto -> MapaAracatuba(onVoltar = { voltarParaInicio() })
                 else -> MensagemMapa("Preparando o mapa de Araçatuba...", carregando = true)
             }
         }
