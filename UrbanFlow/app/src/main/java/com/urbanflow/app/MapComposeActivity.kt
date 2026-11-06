@@ -21,7 +21,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -402,12 +401,15 @@ fun MapaAracatuba(onVoltar: () -> Unit) {
                 }
 
                 if (trafego.showTrafficFlow) {
-                    Text(
-                        "● Livre     ● Moderado     ● Intenso",
-                        color = Color(0xFF627D98),
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        ItemLegenda(Color(0xFF27AE60), "Livre")
+                        ItemLegenda(Color(0xFFF2C94C), "Moderado")
+                        ItemLegenda(Color(0xFFEB5757), "Intenso")
+                    }
                 }
                 if (alterandoEstilo) {
                     Text("Carregando estilo do mapa...", color = Color(0xFF627D98))
@@ -423,5 +425,14 @@ fun MapaAracatuba(onVoltar: () -> Unit) {
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun ItemLegenda(cor: Color, descricao: String) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text("●", color = cor)
+        Spacer(modifier = Modifier.width(4.dp))
+        Text(descricao, color = Color(0xFF627D98))
     }
 }
