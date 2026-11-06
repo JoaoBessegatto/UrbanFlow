@@ -50,7 +50,7 @@ class MapComposeActivity : ComponentActivity() {
             .deviceConfigurationInfo.reqGlEsVersion >= 0x30000
 
         setContent {
-            var pronto by remember { mutableStateOf(TomTomSdk.isInitialized) }
+            var pronto by remember { mutableStateOf(TomTomSdk.isInitialized && chave.isNotBlank() && suportaOpenGl3) }
             var erro by remember { mutableStateOf<String?>(null) }
 
             LaunchedEffect(chave, suportaOpenGl3) {
