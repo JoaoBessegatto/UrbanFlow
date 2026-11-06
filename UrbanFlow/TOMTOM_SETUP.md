@@ -72,3 +72,45 @@ Uma chave TomTom esteve previamente versionada em `UrbanFlow/gradle.properties`.
 - `app/src/main/java/com/urbanflow/app/AlertasActivity.java`
 - `app/src/main/java/com/urbanflow/app/MapComposeActivity.kt`
 - `app/build.gradle`
+
+
+## 6. Mapa preto ou tela sem carregamento
+
+A tela `MapComposeActivity` usa o renderizador **Standard** do Maps and Navigation SDK 2.6.4.
+O mapa utiliza `TextureView` para reduzir problemas de composição com `SurfaceView` e exibe
+uma mensagem caso o evento `onMapReady` não seja recebido em aproximadamente 20 segundos.
+
+Verifique os pontos abaixo nesta ordem:
+
+1. **Produto da chave:** consulte `https://my.tomtom.com/` e confira se sua chave tem acesso a
+   **Maps and Navigation SDK for Android** (map data). Uma chave que funciona para a
+   **Traffic API REST** pode não estar autorizada para os dados de mapa do SDK.
+2. **Internet:** teste se o emulador ou celular abre páginas online normalmente. O UrbanFlow
+   usa o modo online com cache, sem mapa offline instalado.
+3. **GPU do dispositivo:** o Standard renderer precisa de **OpenGL ES 3.0 ou superior**.
+   No emulador, selecione uma configuração gráfica que forneça OpenGL ES 3.0+;
+   na documentação da TomTom, a opção recomendada é "Renderer maximum (up to OpenGL ES 3.1)".
+4. **Diagnóstico:** abra **View → Tool Windows → Logcat** no Android Studio,
+   filtre por `UrbanFlowMap` e observe erros ao abrir "Mapa inteligente".
+5. **Atualização:** use `git pull --ff-only origin feat/tomtom-traffic-integration`,
+   sincronize o Gradle, faça **Build → Rebuild Project** e execute novamente.
+
+### Como interpretar os resultados
+
+- **Mensagem de falta de OpenGL:** o emulador/dispositivo precisa de configuração gráfica adequada.
+- **Mensagem de chave não configurada:** verifique `UrbanFlow/local.properties` e sincronize.
+- **Carregamento por mais de 20 segundos:** verifique permissões do produto,
+  internet e mensagens do SDK no Logcat.
+- **`onMapReady` aparece no Logcat, mas o mapa segue sem ruas:** o renderizador
+  inicializou, porém ainda é necessário investigar os dados de mapa, a conexão e a
+  autorização da chave. O callback não confirma que todos os dados/cartografia chegaram.
+
+A alteração melhora compatibilidade e diagnóstico, mas **não consegue conceder**
+permissões de serviço à chave nem consertar uma GPU sem suporte.
+
+Referências oficiais:
+
+- https://docs.tomtom.com/navigation/android/getting-started/low-end-configuration
+- https://docs.tomtom.com/navigation/android/getting-started/project-setup
+- https://docs.tomtom.com/navigation/android/guides/map-data/troubleshooting
+- https://docs.tomtom.com/navigation/android/guides/map-display/map-display-for-compose/quickstart
