@@ -390,7 +390,7 @@ fun MapaAracatuba(onVoltar: () -> Unit) {
                         }
                     ) {
                         Text(
-                            if (trafego.showTrafficFlow) "● Trânsito ligado" else "○ Trânsito desligado",
+                            if (trafego.showTrafficFlow) "● Fluxo ligado" else "○ Fluxo oculto",
                             color = COR_URBANFLOW
                         )
                     }
