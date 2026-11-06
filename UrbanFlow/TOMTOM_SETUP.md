@@ -114,3 +114,36 @@ Referências oficiais:
 - https://docs.tomtom.com/navigation/android/getting-started/project-setup
 - https://docs.tomtom.com/navigation/android/guides/map-data/troubleshooting
 - https://docs.tomtom.com/navigation/android/guides/map-display/map-display-for-compose/quickstart
+
+
+## 7. Visualização urbana e controles do mapa
+
+A tela do Mapa Inteligente passou a usar:
+
+- Zoom inicial **15.0**, orientação norte e inclinação 0°, priorizando a leitura de ruas e bairros de Araçatuba.
+- Estilo nativo **BROWSING** do TomTom Orbis Maps no início, com botão **Satélite** opcional. Não é necessário buscar um JSON customizado para a abertura inicial.
+- Botões **+**, **−** e **Centro**. O zoom considera o estado atual da câmera mesmo após gestos de pinça no mapa.
+- Botão para ligar ou desligar o fluxo de trânsito, preservando a camada de incidentes.
+- Legenda com as cores verde, amarelo e vermelho para livre, moderado e intenso.
+- Cabeçalho fixo com a cidade, link de retorno e instruções de diagnóstico.
+
+### Desempenho e cobertura
+
+A infraestrutura e o estado do mapa continuam sendo preservados pelo `remember` / `rememberMapViewState` durante recomposições. A troca de estilo só é acionada pelo usuário, e o SDK continua responsável por cachear os tiles online.
+
+O primeiro carregamento ainda depende da internet, da chave e dos tiles/cartografia disponíveis. **Aumentar o zoom não cria ruas ausentes na origem dos dados.** Se a região continuar mostrando apenas uma avenida após aproximar o zoom, teste a opção Satélite e verifique se a chave tem autorização e cobertura dos dados TomTom Orbis Maps. O `onMapReady` indica que o renderizador está pronto, não que todos os tiles chegaram.
+
+### Como atualizar no Android Studio
+
+```bash
+git fetch origin
+git switch feat/tomtom-traffic-integration
+git pull --ff-only origin feat/tomtom-traffic-integration
+```
+
+Depois sincronize o Gradle, execute `Build → Rebuild Project` e teste no celular/emulador. Nenhum arquivo com chave foi alterado.
+
+Referências:
+- https://docs.tomtom.com/navigation/android/guides/map-display/map-display-for-compose/map-styles
+- https://docs.tomtom.com/navigation/android/guides/map-display/map-display-for-compose/camera-and-animations
+- https://docs.tomtom.com/navigation/android/guides/map-data/caching-strategy
